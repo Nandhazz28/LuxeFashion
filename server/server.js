@@ -19,6 +19,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 
-app.listen(process.env.PORT || 5520, () =>
-  console.log("Server running")
-);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is finally running on port ${PORT}`);
+});
