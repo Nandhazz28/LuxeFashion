@@ -19,6 +19,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 
+const PORT = process.env.PORT || 5520; 
+
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is finally running on port ${PORT}`);
 });
