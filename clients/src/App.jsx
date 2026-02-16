@@ -54,7 +54,7 @@ const App = () => {
         <Route path="/order-success/:id" element={<OrderSuccess />} />
         <Route path="/order/:id" element={<OrderDetail />} />
         <Route path="/product/:category/:id" element={<ProductDetail />} />
-        <Route path="/FAQ" element={<FAQ />} />
+        <Route path="/faq" element={<FAQ />} />
         <Route
           path="/CommonBusinessAlternatives"
           element={<CommonBusinessAlternatives />}
@@ -63,10 +63,7 @@ const App = () => {
           path="/ModernSpecializedAlternatives"
           element={<ModernSpecializedAlternatives />}
         />
-        <Route
-          path="/CommonBusinessAlternatives"
-          element={<InternalTeamNames />}
-        />
+        <Route path="/InternalTeamNames" element={<InternalTeamNames />} />
       </Routes>
     </>
   );

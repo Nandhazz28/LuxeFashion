@@ -188,7 +188,7 @@ export default function CommonBusinessAlternatives() {
                     </div>
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300">
-                  © 2026 LuxeArchive // Digital_Assets
+                  © 2026 Luxefashion // Digital_Assets
                 </span>
               </footer>
             </div>

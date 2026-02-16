@@ -23,7 +23,7 @@ const OrderDetail = () => {
   const fetchOrder = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5520/api/orders/${id}`,
+        `https://lively-growth-production-cd2d.up.railway.app/api/orders/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         },
@@ -43,7 +43,7 @@ const OrderDetail = () => {
   const cancelOrder = async () => {
     try {
       const { data } = await axios.put(
-        `http://localhost:5520/api/orders/${id}/cancel`,
+        `https://lively-growth-production-cd2d.up.railway.app/api/orders/${id}/cancel`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

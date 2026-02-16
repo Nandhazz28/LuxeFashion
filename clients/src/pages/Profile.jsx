@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import NavBar from "../components/Navbar";
 import axios from "axios";
-import { 
-  User, 
-  MapPin, 
-  ShoppingBag, 
-  LogOut, 
-  ChevronRight, 
-  Mail, 
-  Save, 
-  X, 
+import {
+  User,
+  MapPin,
+  ShoppingBag,
+  LogOut,
+  ChevronRight,
+  Mail,
+  Save,
+  X,
   Edit3,
   Sparkles,
-  PackageCheck
+  PackageCheck,
 } from "lucide-react";
 
 const Profile = () => {
@@ -39,11 +39,11 @@ const Profile = () => {
     const fetchData = async () => {
       try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        const base = "http://localhost:5520/api";
-        
+        const base = "https://lively-growth-production-cd2d.up.railway.app/api";
+
         const [{ data: userData }, { data: orderData }] = await Promise.all([
           axios.get(`${base}/users/profile`, config),
-          axios.get(`${base}/orders/my-orders`, config)
+          axios.get(`${base}/orders/my-orders`, config),
         ]);
 
         setUser(userData);
@@ -59,7 +59,8 @@ const Profile = () => {
     fetchData();
   }, [token, navigate]);
 
-  const handleChange = (e) => setAddressForm({ ...addressForm, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setAddressForm({ ...addressForm, [e.target.name]: e.target.value });
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -69,9 +70,9 @@ const Profile = () => {
   const saveAddress = async () => {
     try {
       const { data } = await axios.put(
-        "http://localhost:5520/api/users/profile",
+        "https://lively-growth-production-cd2d.up.railway.app/api/users/profile",
         { address: addressForm },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
       setUser(data);
       setEditing(false);
@@ -80,14 +81,17 @@ const Profile = () => {
     }
   };
 
-  if (loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="flex flex-col items-center gap-6">
-        <div className="w-16 h-16 border-t-2 border-pink-500 rounded-full animate-spin" />
-        <span className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-400">Syncing Profile</span>
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center gap-6">
+          <div className="w-16 h-16 border-t-2 border-pink-500 rounded-full animate-spin" />
+          <span className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-400">
+            Syncing Profile
+          </span>
+        </div>
       </div>
-    </div>
-  );
+    );
 
   return (
     <div className="bg-white min-h-screen">
@@ -98,19 +102,26 @@ const Profile = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Sparkles size={14} className="text-pink-500" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">Account Dashboard</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">
+                Account Dashboard
+              </span>
             </div>
             <h1 className="text-7xl font-black text-gray-900 tracking-tighter leading-none">
-              Welcome, <span className="text-pink-600 italic font-serif uppercase">{user?.name.split(' ')[0]}</span>
+              Welcome,{" "}
+              <span className="text-pink-600 italic font-serif uppercase">
+                {user?.name.split(" ")[0]}
+              </span>
             </h1>
           </div>
-          <button onClick={logout} className="mt-8 md:mt-0 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-red-400 hover:text-red-600 transition-colors">
+          <button
+            onClick={logout}
+            className="mt-8 md:mt-0 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-red-400 hover:text-red-600 transition-colors"
+          >
             <LogOut size={14} /> Secure Sign Out
           </button>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-16">
-          
           <div className="lg:col-span-4">
             <div className="bg-gray-50 rounded-[3rem] p-10 sticky top-32">
               <div className="flex items-center gap-4 mb-10">
@@ -118,8 +129,12 @@ const Profile = () => {
                   <User size={24} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-black uppercase tracking-widest text-gray-900">{user?.name}</h3>
-                  <p className="text-[10px] font-bold text-gray-400">{user?.email}</p>
+                  <h3 className="text-sm font-black uppercase tracking-widest text-gray-900">
+                    {user?.name}
+                  </h3>
+                  <p className="text-[10px] font-bold text-gray-400">
+                    {user?.email}
+                  </p>
                 </div>
               </div>
 
@@ -128,10 +143,10 @@ const Profile = () => {
                   <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-400 mb-4 flex items-center gap-2">
                     <MapPin size={12} /> Shipping Destination
                   </h4>
-                  
+
                   {editing ? (
                     <div className="space-y-3 bg-white p-6 rounded-3xl shadow-lg border border-gray-100">
-                      {['street', 'city', 'pincode'].map(field => (
+                      {["street", "city", "pincode"].map((field) => (
                         <input
                           key={field}
                           name={field}
@@ -142,10 +157,16 @@ const Profile = () => {
                         />
                       ))}
                       <div className="flex gap-2 pt-2">
-                        <button onClick={saveAddress} className="flex-1 bg-gray-900 text-white py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-pink-600 transition-colors flex items-center justify-center gap-2">
+                        <button
+                          onClick={saveAddress}
+                          className="flex-1 bg-gray-900 text-white py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-pink-600 transition-colors flex items-center justify-center gap-2"
+                        >
                           <Save size={14} /> Save
                         </button>
-                        <button onClick={() => setEditing(false)} className="bg-gray-100 p-3 rounded-xl text-gray-400">
+                        <button
+                          onClick={() => setEditing(false)}
+                          className="bg-gray-100 p-3 rounded-xl text-gray-400"
+                        >
                           <X size={16} />
                         </button>
                       </div>
@@ -155,15 +176,22 @@ const Profile = () => {
                       {user?.address?.street ? (
                         <div className="bg-white p-6 rounded-3xl border border-gray-100 group-hover:border-pink-200 transition-all">
                           <p className="text-[11px] font-bold text-gray-600 leading-relaxed uppercase tracking-tighter">
-                            {user.address.street}<br />
+                            {user.address.street}
+                            <br />
                             {user.address.city} — {user.address.pincode}
                           </p>
-                          <button onClick={() => setEditing(true)} className="mt-4 text-[9px] font-black uppercase tracking-widest text-pink-500 flex items-center gap-2 hover:text-black">
+                          <button
+                            onClick={() => setEditing(true)}
+                            className="mt-4 text-[9px] font-black uppercase tracking-widest text-pink-500 flex items-center gap-2 hover:text-black"
+                          >
                             <Edit3 size={12} /> Update Address
                           </button>
                         </div>
                       ) : (
-                        <button onClick={() => setEditing(true)} className="w-full py-8 border-2 border-dashed border-gray-200 rounded-3xl text-[10px] font-black uppercase tracking-widest text-gray-400 hover:border-pink-300 hover:text-pink-500 transition-all">
+                        <button
+                          onClick={() => setEditing(true)}
+                          className="w-full py-8 border-2 border-dashed border-gray-200 rounded-3xl text-[10px] font-black uppercase tracking-widest text-gray-400 hover:border-pink-300 hover:text-pink-500 transition-all"
+                        >
                           + Add Primary Address
                         </button>
                       )}
@@ -176,14 +204,24 @@ const Profile = () => {
 
           <div className="lg:col-span-8">
             <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-gray-900 mb-10 flex items-center gap-4">
-              01. Order Archives <span className="h-px flex-1 bg-gray-100"></span>
+              01. Order Archives{" "}
+              <span className="h-px flex-1 bg-gray-100"></span>
             </h3>
 
             {orders.length === 0 ? (
               <div className="py-24 text-center bg-gray-50 rounded-[3rem] border border-gray-100">
-                <ShoppingBag size={48} className="mx-auto text-gray-200 mb-6" strokeWidth={1} />
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-6">No purchase history found</p>
-                <Link to="/" className="bg-gray-900 text-white px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] hover:bg-pink-600 transition-colors shadow-xl">
+                <ShoppingBag
+                  size={48}
+                  className="mx-auto text-gray-200 mb-6"
+                  strokeWidth={1}
+                />
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-6">
+                  No purchase history found
+                </p>
+                <Link
+                  to="/"
+                  className="bg-gray-900 text-white px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] hover:bg-pink-600 transition-colors shadow-xl"
+                >
                   Explore Collection
                 </Link>
               </div>
@@ -204,25 +242,34 @@ const Profile = () => {
                           Order No. {order._id.slice(-8).toUpperCase()}
                         </span>
                         <p className="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-widest">
-                          Amount: <span className="text-gray-900">₹{order.totalAmount.toLocaleString()}</span>
+                          Amount:{" "}
+                          <span className="text-gray-900">
+                            ₹{order.totalAmount.toLocaleString()}
+                          </span>
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-6 w-full md:w-auto justify-between md:justify-start">
-                      <div className={`px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest ${
-                        order.orderStatus === "Cancelled" ? "bg-red-50 text-red-500" : "bg-pink-50 text-pink-600"
-                      }`}>
+                      <div
+                        className={`px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest ${
+                          order.orderStatus === "Cancelled"
+                            ? "bg-red-50 text-red-500"
+                            : "bg-pink-50 text-pink-600"
+                        }`}
+                      >
                         {order.orderStatus}
                       </div>
-                      <ChevronRight size={18} className="text-gray-300 group-hover:text-pink-500 group-hover:translate-x-1 transition-all" />
+                      <ChevronRight
+                        size={18}
+                        className="text-gray-300 group-hover:text-pink-500 group-hover:translate-x-1 transition-all"
+                      />
                     </div>
                   </Link>
                 ))}
               </div>
             )}
           </div>
-
         </div>
       </main>
     </div>
