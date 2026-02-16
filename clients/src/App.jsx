@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import HomePage from "./pages/HomePage";
 import Men from "./pages/Men";
 import Women from "./pages/Women";
@@ -65,6 +66,7 @@ const App = () => {
         />
         <Route path="/InternalTeamNames" element={<InternalTeamNames />} />
       </Routes>
+      <SpeedInsights />
     </>
   );
 };
