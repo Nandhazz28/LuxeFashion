@@ -51,6 +51,7 @@ const Register = () => {
                 placeholder="Full Name"
                 className="w-full pl-14 pr-6 py-4.5 bg-gray-50 border-none rounded-2xl text-sm font-bold focus:ring-2 focus:ring-pink-500 transition-all placeholder:text-gray-400 placeholder:font-medium tracking-tight h-14"
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
+                autoComplete="name"
               />
             </div>
 
@@ -64,6 +65,7 @@ const Register = () => {
                 placeholder="Email Address"
                 className="w-full pl-14 pr-6 py-4.5 bg-gray-50 border-none rounded-2xl text-sm font-bold focus:ring-2 focus:ring-pink-500 transition-all placeholder:text-gray-400 placeholder:font-medium tracking-tight h-14"
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
+                autoComplete="email"
               />
             </div>
 
@@ -77,6 +79,7 @@ const Register = () => {
                 placeholder="Password"
                 className="w-full pl-14 pr-6 py-4.5 bg-gray-50 border-none rounded-2xl text-sm font-bold focus:ring-2 focus:ring-pink-500 transition-all placeholder:text-gray-400 placeholder:font-medium tracking-tight h-14"
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
+                autoComplete="new-password"
               />
             </div>
 
