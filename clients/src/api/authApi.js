@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API = "https://lively-growth-production-cd2d.up.railway.app/api/auth";
-
+const API = "http://localhost:5520/api/auth";
 export const loginUser = async (data) => {
   const res = await axios.post(`${API}/login`, data);
   return res.data;

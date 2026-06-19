@@ -1,5 +1,4 @@
-const API = "https://lively-growth-production-cd2d.up.railway.app/api/orders";
-
+const API = "http://localhost:5520/api/orders";
 export const createOrder = async (order, token) => {
   const res = await fetch(API, {
     method: "POST",
