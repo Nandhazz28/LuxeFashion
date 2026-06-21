@@ -11,19 +11,35 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+// ✅ Dynamic CORS configuration that accepts any Vercel URL
 const corsOptions = {
-  origin: [
-    "https://luxe-fashion-kuzd6f3yd-nandhazz28s-projects.vercel.app",
-    "http://localhost:3000", // for local development
-    "http://localhost:5173", // for Vite dev server
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      // Local development
+      "http://localhost:3000",
+      "http://localhost:5173",
+      "http://localhost:5174",
+      // Accept any Vercel deployment URL
+      /^https:\/\/.*\.vercel\.app$/,
+    ];
+
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.some(allowed => 
+      typeof allowed === 'string' ? allowed === origin : allowed.test(origin)
+    )) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed"));
+    }
+  },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
-
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
