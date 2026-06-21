@@ -1,4 +1,4 @@
-const API = "http://localhost:5520/api/orders";
+const API = "https://chubby-pants-pull.loca.lt";
 export const createOrder = async (order, token) => {
   const res = await fetch(API, {
     method: "POST",

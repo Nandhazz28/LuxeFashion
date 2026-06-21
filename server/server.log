@@ -1,0 +1,4 @@
+nohup: ignoring input
+[dotenv@17.2.4] injecting env (3) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+Server is finally running on port 5520
+MongoDB Connected
