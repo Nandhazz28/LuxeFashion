@@ -39,7 +39,7 @@ const Profile = () => {
     const fetchData = async () => {
       try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        const base = "https://luxefashion.onrender.com/api/users/api";
+        const base = "https://luxefashion.onrender.com/api";
 
         const [{ data: userData }, { data: orderData }] = await Promise.all([
           axios.get(`${base}/users/profile`, config),
@@ -70,7 +70,7 @@ const Profile = () => {
   const saveAddress = async () => {
     try {
       const { data } = await axios.put(
-        " https://luxefashion.onrender.com/api/users/profile",
+        "https://luxefashion.onrender.com/api/users/profile",
         { address: addressForm },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -190,7 +190,7 @@ const Profile = () => {
                       ) : (
                         <button
                           onClick={() => setEditing(true)}
-                          className="w-full py-8 border-2 border-dashed border-gray-200 rounded-3xl text-[10px] font-black uppercase tracking-widest text-gray-400 hover:border-pink-300 hover:text-pink-500 transition-all"
+                          className="w-full py-8 border-2 border-dashed border-gray-200 rounded-3xl text-[10px] font-black uppercase tracking-widest text-gray-400 hover:border-pink-300 hover:text-pink-300 transition-all"
                         >
                           + Add Primary Address
                         </button>
@@ -231,7 +231,7 @@ const Profile = () => {
                   <Link
                     key={order._id}
                     to={`/order/${order._id}`}
-                    className="flex flex-col md:flex-row items-center justify-between p-8 bg-white border border-gray-100 rounded-[2.5rem] hover:shadow-2xl hover:shadow-pink-100/50 hover:border-pink-100 transition-all group"
+                    className="flex flex-col md:flex-row items-center justify-between p-8 bg-white border border-gray-100 rounded-[2.5rem] hover:shadow-2xl hover:shadow-pink-100/50 hover:border-pink-200 transition-all group"
                   >
                     <div className="flex items-center gap-6 mb-4 md:mb-0">
                       <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 group-hover:text-pink-500 transition-colors">
