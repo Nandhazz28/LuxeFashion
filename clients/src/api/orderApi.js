@@ -1,4 +1,4 @@
-const API = "https://tangy-mangos-sing.loca.lt/api/orders";
+const API = "https://whole-flies-scream.loca.lt/api/orders";
 export const createOrder = async (order, token) => {
   const res = await fetch(API, {
     method: "POST",
