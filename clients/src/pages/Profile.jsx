@@ -39,7 +39,7 @@ const Profile = () => {
     const fetchData = async () => {
       try {
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        const base = "https://lively-growth-production-cd2d.up.railway.app/api";
+        const base = "https://luxefashion.onrender.com/api/users/api";
 
         const [{ data: userData }, { data: orderData }] = await Promise.all([
           axios.get(`${base}/users/profile`, config),
@@ -70,7 +70,7 @@ const Profile = () => {
   const saveAddress = async () => {
     try {
       const { data } = await axios.put(
-        "https://lively-growth-production-cd2d.up.railway.app/api/users/profile",
+        " https://luxefashion.onrender.com/api/users/profile",
         { address: addressForm },
         { headers: { Authorization: `Bearer ${token}` } },
       );

@@ -11,8 +11,19 @@ dotenv.config();
 connectDB();
 
 const app = express();
+const corsOptions = {
+  origin: [
+    "https://luxe-fashion-kuzd6f3yd-nandhazz28s-projects.vercel.app",
+    "http://localhost:3000", // for local development
+    "http://localhost:5173", // for Vite dev server
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-app.use(cors({}));
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
