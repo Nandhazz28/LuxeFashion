@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "https://tangy-mangos-sing.loca.lt//api/auth";
+const API = "https://tangy-mangos-sing.loca.lt/api/auth";
 
 export const loginUser = async (data) => {
   const res = await axios.post(`${API}/login`, data);
