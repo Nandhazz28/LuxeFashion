@@ -12,34 +12,14 @@ connectDB();
 
 const app = express();
 
-// ✅ Dynamic CORS configuration that accepts any Vercel URL
-const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      // Local development
-      "http://localhost:3000",
-      "http://localhost:5173",
-      "http://localhost:5174",
-      // Accept any Vercel deployment URL
-      /^https:\/\/.*\.vercel\.app$/,
-    ];
-
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin || allowedOrigins.some(allowed => 
-      typeof allowed === 'string' ? allowed === origin : allowed.test(origin)
-    )) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS not allowed"));
-    }
-  },
-  credentials: true,
+// ✅ Enable CORS for all origins (development) or configure specifically
+app.use(cors({
+  origin: "*",
+  credentials: false,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  optionsSuccessStatus: 200,
-};
+}));
 
-app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
