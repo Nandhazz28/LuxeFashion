@@ -6,7 +6,8 @@ export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
-  if (userExists) return res.status(400).json("User exists");
+  if (userExists)
+    return res.status(400).json({ message: "User already exists" });
 
   const hashed = await bcrypt.hash(password, 10);
 
@@ -16,7 +17,7 @@ export const registerUser = async (req, res) => {
     password: hashed,
   });
 
-  res.json({
+  res.status(201).json({
     _id: user._id,
     name: user.name,
     email: user.email,
@@ -30,7 +31,7 @@ export const loginUser = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user || !(await bcrypt.compare(password, user.password)))
-    return res.status(401).json("Invalid credentials");
+    return res.status(401).json({ message: "Invalid credentials" });
 
   res.json({
     _id: user._id,
