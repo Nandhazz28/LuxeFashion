@@ -1,8 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useCallback } from "react";
-import axios from "axios";
 import NavBar from "../components/Navbar";
 import { toast } from "react-hot-toast";
+import { getOrderById, cancelOrder } from "../api/orderApi";
 import {
   Package,
   MapPin,
@@ -22,12 +22,7 @@ const OrderDetail = () => {
 
   const fetchOrder = useCallback(async () => {
     try {
-      const { data } = await axios.get(
-        ` https://luxefashion.onrender.com/api/orders/${id}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const data = await getOrderById(id, token);
       setOrder(data);
     } catch (err) {
       toast.error("Failed to sync with server");
@@ -40,15 +35,9 @@ const OrderDetail = () => {
     fetchOrder();
   }, [fetchOrder]);
 
-  const cancelOrder = async () => {
+  const handleCancelOrder = async () => {
     try {
-      const { data } = await axios.put(
-        ` https://luxefashion.onrender.com/api/orders/${id}/cancel`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const data = await cancelOrder(id, token);
       setOrder(data);
       toast.success("Order Cancelled");
     } catch (err) {
@@ -149,7 +138,7 @@ const OrderDetail = () => {
 
             {canCancel && (
               <button
-                onClick={cancelOrder}
+                onClick={handleCancelOrder}
                 className="w-full py-6 rounded-3xl border-2 border-red-50 text-red-400 text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white hover:border-red-500 transition-all flex items-center justify-center gap-2"
               >
                 <XCircle size={14} /> Cancel Acquisition
