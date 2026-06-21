@@ -12,22 +12,15 @@ connectDB();
 
 const app = express();
 
-app.use(cors({
-  origin: [
-    "https://luxe-fashion-ptn19eu1a-nandhazz28s-projects.vercel.app"
-  ],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+app.use(cors({}));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 
-const PORT = process.env.PORT || 5520; 
+const PORT = process.env.PORT || 5520;
 
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is finally running on port ${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is finally running on port ${PORT}`);
 });
